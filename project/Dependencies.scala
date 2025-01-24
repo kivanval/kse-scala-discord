@@ -7,7 +7,7 @@ object Dependencies {
   }
   object Cats {
     val catsCore = "org.typelevel" %% "cats-core" % "2.13.0"
-    val catsEffect = "org.typelevel" %% "cats-effect" % "3.5.7"
-    val all: Seq[ModuleID] = Seq(catsCore, catsEffect)
+    val mouse = "org.typelevel" %% "mouse" % "1.3.2"
+    val all: Seq[ModuleID] = Seq(catsCore, mouse)
   }
 }
