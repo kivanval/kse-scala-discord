@@ -8,5 +8,5 @@ lazy val root = (project in file("."))
   .settings(
     name := "kse-scala-discord",
     libraryDependencies ++=
-      Discord.all ++ Cats.all
+      Discord.all ++ Logging.all ++ Cats.all
   )
