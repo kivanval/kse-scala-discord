@@ -5,6 +5,7 @@ import discord4j.core.`object`.entity.{Message, User}
 import discord4j.core.event.ReactiveEventAdapter
 import discord4j.core.event.domain.message.MessageCreateEvent
 import reactor.core.publisher.Mono
+import scala.jdk.OptionConverters.*
 
 object ReactiveEventAdapterLike extends ReactiveEventAdapter with StrictLogging:
 
@@ -13,7 +14,13 @@ object ReactiveEventAdapterLike extends ReactiveEventAdapter with StrictLogging:
 
   private def echo(message: Message): Mono[Unit] = for {
     self    <- message.getClient.getSelf
-    _       <- Mono.justOrEmpty(message.getAuthor.filter(_ != self))
+    _       <- authorIsNotBot(self)(message.getAuthor.toScala)
     channel <- message.getChannel
     message <- channel.createMessage(message.getContent)
   } yield ()
+
+  private def authorIsNotBot(self: User)(author: Option[User]): Mono[Unit] =
+    Mono.justOrEmpty((author match
+      case None => Some(())
+      case some => some.filter(_ != self).map(_ => ())
+    ).toJava)
