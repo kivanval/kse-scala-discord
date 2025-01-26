@@ -15,4 +15,8 @@ object Dependencies {
     val mouse = "org.typelevel" %% "mouse" % "1.3.2"
     val all: Seq[ModuleID] = Seq(catsCore, mouse)
   }
+  object CPS {
+    val dottyCpsAsync = "io.github.dotty-cps-async" %% "dotty-cps-async" % "1.0.0"
+    val all: Seq[ModuleID] = Seq(dottyCpsAsync)
+  }
 }

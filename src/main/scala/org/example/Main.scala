@@ -10,7 +10,6 @@ object Main:
       .get("token")
       .orElse(args.headOption)
       .fold(throw new IllegalArgumentException("Missing token"))(identity)
-
     DiscordClient
       .create(token)
       .withGateway(_.on(ReactiveEventAdapterLike))
