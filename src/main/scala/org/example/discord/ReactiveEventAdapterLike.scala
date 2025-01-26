@@ -16,15 +16,10 @@ object ReactiveEventAdapterLike extends ReactiveEventAdapter with StrictLogging:
     .doOnError(error => logger.error(error.getMessage))
 
   private def echo(message: Message): Mono[Unit] = async[Mono] {
-    val self    = await(message.getClient.getSelf)
-    val author  = await(authorIsNotBot(self)(message.getAuthor.toScala))
-    val channel = await(message.getChannel)
-    await(channel.createMessage(message.getContent))
-    ()
+    val self   = await(message.getClient.getSelf)
+    val author = message.getAuthor.toScala
+    if (!author.contains(self)) {
+      val channel = await(message.getChannel)
+      await(channel.createMessage(message.getContent).asInstanceOf[Mono[Message]])
+    }
   }
-
-  private def authorIsNotBot(self: User)(author: Option[User]): Mono[Unit] =
-    Mono.justOrEmpty((author match
-      case None => Some(())
-      case some => some.filter(_ != self).map(_ => ())
-    ).toJava)
