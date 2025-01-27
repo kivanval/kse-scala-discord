@@ -1,9 +1,8 @@
 package org.example.cps
 
-import cps.{CpsMonadConversion, CpsTryMonadInstanceContext}
+import cps.CpsTryMonadInstanceContext
 import reactor.core.publisher.Mono
 
-import java.util.Optional
 import scala.util.{Failure, Success, Try}
 
 class MonoCpsMonad extends CpsTryMonadInstanceContext[Mono] {
@@ -19,7 +18,3 @@ class MonoCpsMonad extends CpsTryMonadInstanceContext[Mono] {
 }
 
 given MonoCpsMonad = new MonoCpsMonad
-
-given CpsMonadConversion[Optional, Mono] with {
-  override def apply[T](ft: Optional[T]): Mono[T] = Mono.justOrEmpty(ft)
-}
