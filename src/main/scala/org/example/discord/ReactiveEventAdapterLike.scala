@@ -20,6 +20,6 @@ object ReactiveEventAdapterLike extends ReactiveEventAdapter with StrictLogging:
     val author = message.getAuthor.toScala
     if (!author.contains(self)) {
       val channel = await(message.getChannel)
-      await(channel.createMessage(message.getContent).asInstanceOf[Mono[Message]])
+      await[Mono, Message, Mono](channel.createMessage(message.getContent))
     }
   }
