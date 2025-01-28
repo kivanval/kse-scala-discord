@@ -1,0 +1,12 @@
+{
+  "name": "delete",
+  "description": "Delete messages in the channel",
+  "options": [
+    {
+      "name": "number",
+      "description": "Number of messages",
+      "type": 4,
+      "required": true
+    }
+  ]
+}

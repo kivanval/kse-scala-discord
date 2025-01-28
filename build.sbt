@@ -1,5 +1,3 @@
-import Dependencies.*
-
 ThisBuild / version := "0.1.0-SNAPSHOT"
 
 ThisBuild / scalaVersion := "3.3.4"
@@ -13,7 +11,6 @@ lazy val root = (project in file("."))
       "com.typesafe.scala-logging" %% "scala-logging"   % "3.9.5",
       "org.typelevel"              %% "cats-core"       % "2.13.0",
       "org.typelevel"              %% "mouse"           % "1.3.2",
-      "io.github.dotty-cps-async"  %% "dotty-cps-async" % "1.0.0",
-      "org.json4s"                 %% "json4s-jackson"  % "4.0.7"
+      "io.github.dotty-cps-async"  %% "dotty-cps-async" % "1.0.0"
     )
   )
